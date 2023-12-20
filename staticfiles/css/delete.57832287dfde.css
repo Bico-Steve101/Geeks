@@ -1,0 +1,80 @@
+.delete{
+  text-align: center !important;
+  margin-top: 3em;
+}
+p{
+  font-size: 1.2em;
+  font-weight: 600;
+}
+.caption{
+  color:#646010;
+  font-size: 1.3em;
+
+}
+.delete_section{
+  width: 70%;
+  border: 1px solid rgba(0, 0, 0, 0.117);
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  padding: 1.5em;
+  box-shadow:5px 10px 10px 5px #bbb46668;
+}
+.cancel{
+  margin-top: 1em !important;
+  font-size: 1.5em;
+}
+.submit {
+  margin-top: 10px;
+  background-color: #08d;
+  border-radius: 12px;
+  border: 0;
+  box-sizing: border-box;
+  color: rgb(255, 255, 255);
+  cursor: pointer;
+  font-size: 100%;
+  height: 50px;
+  margin-top: 10px;
+   outline: 0;
+  text-align: center;
+  width: 50%;
+  border: 1px solid #bbb766;
+  color: #fefcfc;
+  box-shadow: 1px 5px 20px -10px #66bb6a;
+  display: inline-block;
+  transition: all .3s;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.submit:after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #fafa6e;
+  z-index: -2;
+}
+
+.submit:before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0%;
+  height: 100%;
+  background-color: #ffffff;
+  transition: all .3s;
+  z-index: -1;
+}
+
+.submit:hover {
+  color: #bbb466;
+}
+
+.submit:hover:before {
+  width: 100%;
+}

@@ -1,0 +1,381 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, 
+    initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>Geeks</title>
+    <link rel="icon" type="image/png" href="{% static '/img/logo.svg' %}">
+    <link rel="stylesheet" href="{% static '/css/members.css' %}">
+    <link  rel="stylesheet" 
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" 
+    integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" 
+    crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="{%static '/css/main.css' %}">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <nav class="header__nav w-120">
+                <div class="header__logo">
+                   <a href="/"> <img src="{% static '/img/logo2.png' %}" alt="Logo"></a>
+                </div>
+                <div class="header__nav__content">
+                    <div class="nav-close-icon"></div>
+                    <ul class="header__menu">
+                        <li class="menu__item">
+                            <a href="/" class="menu__link active">Home</a>
+                        </li>
+                        <li class="menu__item">
+                            <a href="#about1" class="menu__link">About</a>
+                        </li>
+                        <!-- <li class="menu__item">
+                            <a href="#team1" class="menu__link">Team</a>
+                        </li> -->
+                        <li class="menu__item">
+                            <a href="#contact1" class="menu__link">Contact</a>
+                        </li>
+                         <li class="menu__item">
+                            <a href="{% url 'last:dashboard' %}" class="menu__link">Dashboard</a>
+                        </li>
+                    </ul>
+                    <div class="header__signup">
+                        {% if request.user.is_authenticated %}
+                        <a href="{% url 'logout' %}" class="btn btn__signup">
+                            <i class="fas fa-user-plus"></i> Logout
+                        </a>
+                        {% else %}
+                        <a href="{% url 'login' %}" class="btn btn__signup">
+                            <i class="fas fa-user-plus"></i> Sign Up
+                        </a>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="hamburger-menu-wrap">
+                    <div class="hamburger-menu">
+                        <div class="line"></div>
+                        <div class="line"></div>
+                        <div class="line"></div>
+                        <div class="line"></div>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+
+        <section class="users">
+            <div class="users__content">
+                <div class="users__head w-105">
+                    <img src="{% static '/img/quote.svg' %}" alt="Quote" class="users__quote">
+                    <h2 class="users__title">Some of the Geeks members </h2>
+                </div>
+                <div class="users__body">
+                    <div class="user__list">
+                        {% for user in user %}
+                        <div class="user">
+                            <div class="user__profile">
+                                <div class="user__img">
+                                    <img src="{% static '/img/testimonials/test.png' %}" alt="Testimonial">
+                                </div>
+                                <div class="user__info">
+                                    <h4 class="user__name"> <a class="user__name" href="{%  url 'last:profile' user.id %}">{{ user.username }}</a> </h4>
+                                    <h4 class="user__title">{{ user.tag }} </h4>
+                                </div>
+                            </div>
+                            <p class="user__description">
+                               {{ user.bio }}
+                            </p>
+                            <div class="edit">
+                               {% if request.user == user %}
+                                        <a href="{% url 'last:edit-profile' %}">
+                                    <i class="fa-solid fa-pen"></i>
+                                        </a>
+                                    {% endif %}
+                                    {% if request.user == user %}
+                                        <a href="{% url 'last:delete_profile' user_id=user.id %}">
+                                    <i class="fa-regular fa-trash-can"></i>
+                                        </a>
+                                {% endif %}
+                            </div>
+                        </div>
+                            {% empty %}
+                    <div class="empty">
+                    <img src="{% static '/img/inbox.png'%}" alt="Logo">
+                    </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about1" class="opportunities">
+            <div class="opportunities__img">
+                <img src="{% static '/img/laptop.png' %}" alt="">
+            </div>
+            <div class="opportunities__content w-105">
+                <div class="opportunities__head">
+                    <h2 class="opportunities__title">Know Geeks</h2>
+                    <p class="opportunities__description">Think of 
+                        Geeks as a portfolio of a small group of 
+                        passionate developers. Here you can see 
+                        some of the projects that the team has done 
+                        and connect with people who share similar 
+                        passion to build your skills.
+                    </p>
+                </div>
+                <div class="opportunities__body">
+                    <div class="opportunity">
+                        <img src="{% static '/img/opportunites/iconone.svg' %}" alt="Icon" class="opportunity__icon">
+                        <h4 class="opportunity__title">Connect with other programmers</h4>
+                        <p class="opportunity__description">
+                            Join our vibrant community of like-minded programmers. Share ideas, collaborate on projects, and expand your network.
+                            Whether you're a beginner or an experienced coder, connect with fellow geeks to enhance your coding journey.                        </p>
+                    </div>
+
+                    <div class="opportunity active">
+                        <img src="{% static '/img/opportunites/iconthree.svg' %}" alt="Icon" class="opportunity__icon">
+                        <h4 class="opportunity__title">We can Build your Websites</h4>
+                        <p class="opportunity__description">
+                        Need a website? Leave the coding to us!
+                        Our experienced team of developers is ready
+                        to bring your vision to life. From personal
+                        portfolios to e-commerce sites, we've got
+                        the expertise to design and build websites
+                        tailored to your needs.                        </p>
+                    </div>
+                    <div class="opportunity">
+                        <img src="{% static '/img/opportunites/iconfour.svg' %}" alt="Icon" class="opportunity__icon">
+                        <h4 class="opportunity__title">Geek Hackathons
+                        </h4>
+                        <p class="opportunity__description">
+                         Dive into the world of innovation with
+                         our Geek Hackathons. Test your coding skills,
+                         tackle exciting challenges, and compete with
+                         fellow geeks. Whether you're a seasoned coder
+                         or a beginner, our hackathons provide a fun
+                         and collaborative environment to push your limits
+                        and create something amazing.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+     <section class="invest  w-105">
+            <div class="invest__content">
+                <div class="invest__head">
+                    <h2 class="invest__title">Join and Advertise Hackathons  <span class="edit"> <a href="{% url 'last:add-hackathon' %}"><i class="fa-solid fa-plus fa-beat-fade"></i></a></span> </h2>
+                    <p class="invest__description">Below are some Hackathons that
+                        you can join and compete with others. The competitions are
+                        meant to help you build and improve your skills. The
+                        competitors will be graded according to how they
+                        have performed. </p>
+                </div>
+                <div class="invest__body">
+                      {% for hackathons in hackathons %}
+                    <div class="invest__item"  style="background-image: url('{{ hackathons.image.url}}'); opacity: 0.7;" >
+                        <div class="invest__item__head">
+                            <h5 class="invest__item__subtitle">{{ hackathons.created }}</h5>
+                        </div>
+                        <div class="invest__item__body">
+                            <h4 class="invest__item__title">{{ hackathons.name }} Hackathon</h4>
+                            <p class="invest__item_description">
+                                {{ hackathons.theme|truncatewords:15 }}
+                            </p>
+                        </div>
+                        <div class="invest__item__footer">
+                            <a href="{% url 'last:hackathon_details' hackathons.id %}" class="btn btn__invest">Join Now</a>
+{#                            <a class="btn btn__invest">Join Now</a>#}
+                        </div>
+                    <div class="base_edit">
+                             {% if user == hackathons.founder %}
+                                        <a href="{% url 'last:update-hackathon' hackathon_id=hackathons.id %}">
+                                    <i class="fa-solid fa-pen"></i>
+                                        </a>
+                                    {% endif %}
+                                    {% if user == hackathons.founder %}
+                                        <a href="{% url 'last:delete_hackathon' hackathon_id=hackathons.id %}">
+                                    <i class="fa-regular fa-trash-can"></i>
+                                        </a>
+                                    {% endif %}
+                        </div>
+                    </div>
+                          {% empty %}
+                    <div class="empty">
+                    <img src="{% static '/img/inbox.png'%}" alt="Logo">
+                    </div>
+                     {% endfor %}
+{#                    <div class="invest__item">#}
+{#                        <div class="invest__item__head">#}
+{#                            <h5 class="invest__item__subtitle">1st Jan-2023</h5>#}
+{#                        </div>#}
+{#                        <div class="invest__item__body">#}
+{#                            <h4 class="invest__item__title">Reserve Room</h4>#}
+{#                            <p class="invest__item_description">#}
+{#                                The Website allows you to reserve a hotel room prior#}
+{#                                to your travel.Saving you of the hustle.#}
+{#                            </p>#}
+{#                        </div>#}
+{#                        <div class="invest__item__footer">#}
+{#                            <a href="#" class="btn btn__invest">Join Now</a>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                    <div class="invest__item">#}
+{#                        <div class="invest__item__head">#}
+{#                            <h5 class="invest__item__subtitle">3rd Feb-2023</h5>#}
+{#                        </div>#}
+{#                        <div class="invest__item__body">#}
+{#                            <h4 class="invest__item__title">Study Manager#}
+{#                            </h4>#}
+{#                            <p class="invest__item_description">#}
+{#                                The website is meant to make learning easy and fun,#}
+{#                                helping you manage your progress.It's also meant to#}
+{#                                keep students on track.#}
+{#                            </p>#}
+{#                        </div>#}
+{#                        <div class="invest__item__footer">#}
+{#                            <a href="#" class="btn btn__invest">Join Now</a>#}
+{#                        </div>#}
+{#                    </div>#}
+                </div>
+            </div>
+        </section>
+
+        <section class="invest  w-105">
+            <div class="invest__content">
+                <div class="invest__head">
+                    <h2 class="invest__title">Some of Geeks Team Projects  <span class="edit"> <a href="{% url 'last:add-project' %}"><i class="fa-solid fa-plus fa-beat-fade"></i></a></span>   </h2>
+                    <p class="invest__description">Below are some of the collaborative
+                        projects that the team members have done some are hosted live
+                        while others are not. Because of the costa of hosting projects
+                        come with but check them out and you can contact us for any info
+                        on what we should improve or have done better.  </p>
+                </div>
+                <div class="invest__body">
+                    {% for project in projects %}
+                    <div class="invest__item"  style="background-image: url('{{ project.image.url}}'); opacity: 0.7;" >
+                        <div class="invest__item__head">
+                            <h5 class="invest__item__subtitle">{{ project.created_at }}</h5>
+                        </div>
+                        <div class="invest__item__body">
+                            <h4 class="invest__item__title">{{ project.title }}</h4>
+                            <p class="invest__item_description">
+                                {{ project.description|truncatewords:20 }}
+                            </p>
+                        </div>
+                        <div class="invest__item__footer">
+                            <a href="{{ project.link }}" class="btn btn__invest">Check It Out</a>
+                        </div>
+                    <div class="base_edit">
+                               {% if user == project.user %}
+                                        <a href="{% url 'last:project_detail' project_id=project.id %}">
+                                    <i class="fa-solid fa-pen"></i>
+                                        </a>
+                                    {% endif %}
+                                   {% if user == project.user %}
+                                        <a href="{% url 'last:delete_project' project_id=project.id %}">
+                                    <i class="fa-regular fa-trash-can"></i>
+                                        </a>
+                                    {% endif %}
+                        </div>
+                    </div>
+                        {% empty %}
+                    <div class="empty">
+                    <img src="{% static '/img/man.png'%}" alt="Logo">
+                    </div>
+                {% endfor %}
+
+
+                </div>
+            </div>
+        </section>
+       
+        <footer id="contact1" class="footer">
+            <div class="footer__body w-105">
+                <nav class="footer__nav">
+                    <ul class="footer_nav__menu">
+                        <li class="footer_nav__item">
+                            <h4 class="footer_nav__menu__title">COMPANY</h4>
+                        </li>
+                        <li class="footer_nav__item">
+                            <a href="#" class="footer_nav__link">About Us</a>
+                        </li>
+                        <li class="footer_nav__item">
+                            <a href="#" class="footer_nav__link">Team</a>
+                        </li>
+                        <li class="footer_nav__item">
+                            <a href="#" class="footer_nav__link">Careers</a>
+                        </li>
+                        <li class="footer_nav__item">
+                            <a href="#" class="footer_nav__link">Contact</a>
+                        </li>
+                    </ul>
+                    <ul class="footer_nav__menu">
+                        <li class="footer_nav__item">
+                            <h4 class="footer_nav__menu__title">INVEST</h4>
+                        </li>
+                        <li class="footer_nav__item">
+                            <a href="#" class="footer_nav__link">Features</a>
+                        </li>
+                        <li class="footer_nav__item">
+                            <a href="#" class="footer_nav__link">How it works</a>
+                        </li>
+                        <li class="footer_nav__item">
+                            <a href="#" class="footer_nav__link">Pricing</a>
+                        </li>
+                        <li class="footer_nav__item">
+                            <a href="#" class="footer_nav__link">Login</a>
+                        </li>
+                    </ul>
+                    <ul class="footer_nav__menu">
+                        <li class="footer_nav__item">
+                            <h4 class="footer_nav__menu__title">LEGAL</h4>
+                        </li>
+                        <li class="footer_nav__item">
+                            <a href="#" class="footer_nav__link">Privacy</a>
+                        </li>
+                        <li class="footer_nav__item">
+                            <a href="#" class="footer_nav__link">Terms</a>
+                        </li>
+                        <li class="footer_nav__item">
+                            <a href="#" class="footer_nav__link">Security</a>
+                        </li>
+                    </ul>
+                </nav>
+                <div class="footer__contact">
+                    <h2 class="footer__contact__title">Geeks Team</h2>
+                    <span>Write to us an E-mail</span>
+                    <form action="">
+                        <input type="text" name="name" placeholder="Enter Name">
+                        <input type="email" name="email" placeholder="Enter Email">
+                        <textarea name="message" id="" cols="30" rows="10" placeholder="Enter Message"></textarea>
+                        <a href="#" class="btn btn__signin">
+                            <i class="fas fa-paper-plane"></i> Send
+                        </a>
+                    </form>   
+                <small>Phone: 0757838398</small>
+                </div>
+            </div>
+            <div class="footer__bottom">
+                <div class="footer__bottom__content w-105">
+                    <div class="footer__logo">
+                        <img src="{% static '/img/logo.png' %}" alt="Logo">
+                    </div>
+                    <p class="footer_copyright">
+                        © Copyright 2023. Geeks By Steve Rebrand.
+                    </p>
+                </div>
+                <img src="{% static '/img/down.png' %}" alt="Down" class="footer_img">
+            </div>
+        </footer>
+    </div>
+    <script src="{% static '/js/main.js' %}" type="module"></script>
+
+</body>
+
+</html>

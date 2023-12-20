@@ -1,0 +1,210 @@
+.heading{
+  background-color: #ffffff;
+  border-radius: .5rem;
+  filter: drop-shadow(0 0 0.75rem rgba(27, 31, 35, 0.15));
+  /* padding: 5rem 2.5rem 2.5rem; */
+  transition: all 0.3s ease-out;
+}
+.heading .title{
+    font-size: 3em;
+    text-align: center;
+    /* margin-bottom: 0.5em; */
+}
+.user__description{
+  background-color: #ffffff70;
+  filter: drop-shadow(0 0 0.5rem #682702);
+    width: 5em;
+    height: 5em;
+    border-radius: 50%;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 3rem 2rem 2rem;
+}
+.grade{
+  font-size: 2.5rem;
+  font-weight:bolder;
+
+}
+.description{
+    width: 40%;
+    background-color: #bdbd4c;
+    border-radius: .5rem;
+    filter: drop-shadow(0 0 0.75rem rgba(2, 36, 71, 0.359));
+    padding: 2rem 2.5rem 2.5rem;
+    transition: all 0.3s ease-out;
+    font-size: 2rem;
+    max-width: 75rem;
+    margin: 0 auto 3rem;
+    text-align: center;
+    text-wrap:wrap;
+    /* display: block;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px; */
+}
+.requirements__section{
+    width: 40%;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #ffffff;
+    border-radius: .5rem;
+    filter: drop-shadow(0 0 0.75rem rgba(27, 31, 35, 0.15));
+    padding: 2rem 1.5rem 2.5rem;
+}
+.requirements__header {
+    text-align: center;
+    margin-bottom: 0.5em;
+    margin-top: 0.5em;
+}
+.requirements{
+    
+    font-size: 1.5rem;
+    max-width: 40rem;
+    list-style-type:circle;
+    margin-left: clamp(1%, 0.1%, 50%) !important;
+    
+}
+
+/*users*/
+.users, .member__user {
+    margin-top: 5rem;
+  }
+  
+  .users__head {
+    position: relative;
+    margin: auto;
+  }
+  
+  .users__quote {
+    position: absolute;
+    top: 0;
+    left: 0;
+    max-height: 11rem;
+    width: auto;
+  }
+  
+  .users__title {
+    font-size: 3.6rem;
+    max-width: 45rem;
+  }
+  
+  .users__body {
+    /* margin: 8rem auto 4rem; */
+    width: 100%;
+    overflow: hidden;
+    padding: 2rem 2rem;
+    position: relative;
+  }
+  
+  .users__body::before, .users__body::after {
+    position: absolute;
+    content: '';
+    top: 0;
+    width: 10%;
+    background-color: #bdbd4c;
+    opacity: .5;
+    height: 100%;
+    z-index: 1;
+  }
+  
+  .users__body::before {
+    left: 0;
+    filter: drop-shadow(5rem 0 4rem #ffffff00);
+  }
+  
+  .users__body::after {
+    right: 0;
+    filter: drop-shadow(-5rem 0 4rem #ffffff00);
+  }
+  
+  .user__list {
+    display: grid;
+    grid-template-columns:  1fr 1fr 1fr;
+    grid-gap: 2.5rem;
+    position: relative;
+  }
+  
+  .user {
+    flex-shrink: 0;
+    padding: 2.5rem;
+    background-color: #bdbd4c;
+    filter: drop-shadow(0 0 0.75rem rgba(49, 56, 62, 0.493));
+    transition: transform .3s ease;
+  }
+   .user__list .edit{
+    margin-right: 45% ;
+    color:#ce1515 !important;
+    margin-top: 1em;
+  }
+  .user:hover {
+    transform: scale(1.1);
+    z-index: 1;
+  }
+  
+  .user__profile {
+    text-align: center;
+    margin-left: auto;
+    display: grid;
+    grid-gap: 2.5rem;
+    align-items: center;
+    font-size: 1.8rem;
+  }
+  
+  .user__img {
+    filter: drop-shadow(0 0 0.5rem #682702);
+    /* width: 2px; */
+    /* height: 2px; */
+    border-radius: 50%;
+  }
+  
+  .user__img img {
+    width: 3em;
+    height: 3em;
+    border-radius: 50%;
+  }
+  
+  .user__name {
+    color: #ffffff;
+  }
+  
+  .user__title {
+    color: #263238;
+  }
+  
+  .user__description {
+    margin-top: 2rem;
+    font-size: 1.8rem;
+    color: #324148;
+    text-align: center;
+  }
+  .edit{
+    color:#ffffff ;
+    margin-top: 1em;
+    float: right;   
+  }
+  span{
+    color: #9c9c1b;
+    text-decoration: underline;
+  }
+  /* .time{
+    border-top: 1px solid green ;
+    height: 20px;
+  } */
+  .location{
+   color: #cf2732;
+   font-weight: 300;
+  }
+  h1{
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+    font-size:clamp(1rem, 2rem, 5rem);
+  }
+  
+  /*End Testimonials*/
+.empty{
+  width:30%;
+  margin-left: auto;
+  margin-right: auto;
+}

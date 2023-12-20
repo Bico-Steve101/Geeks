@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Logout</title>
+</head>
+<body>
+  <link rel="stylesheet" href="{% static '/css/footer.css' %}">
+<div class="container">
+    <h2>Logout</h2>
+    <p>You have been successfully logged out.</p>
+    <a href="{% url 'last:index' %}">Return To Home Page</a>
+    <br>
+    <a href="{% url 'login' %}">Login again</a>
+</div>
+    <footer class="footer">
+        <p class="footer_copyright">
+                        © Copyright 2023. Geeks By Steve Rebrand.
+        </p>
+    </footer>
+
+</body>
+</html>

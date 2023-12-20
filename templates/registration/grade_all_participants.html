@@ -1,0 +1,11 @@
+<form method="post">
+    {% csrf_token %}
+    {% for participant in participants %}
+        <h3>{{ participant.username }}</h3>
+        <label for="id_grade">Grade:</label>
+        <input type="number" id="id_grade" name="grade">
+        <input type="hidden" name="participant" value="{{ participant.id }}">
+        <hr>
+    {% endfor %}
+    <button type="submit">Grade Participants</button>
+</form>

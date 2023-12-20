@@ -1,0 +1,504 @@
+/* Reset some default styles */
+body, h1, h2, h3, p, ul, li {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    transition: padding 0.3s ease-in-out;
+}
+/* Header styles */
+body > .container-fluid {
+    overflow: hidden; /* Prevent the container from scrolling */
+}
+h2 {
+    margin-bottom: 1em;
+}
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+}
+
+.container-fluid {
+    padding: 20px;
+}
+
+/* Header styles */
+header {
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #ffffff;
+    color: #000000;
+    padding: 1rem;
+    transition: padding 0.3s ease-in-out;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 2;
+}
+
+
+header h1 {
+    margin: 0;
+    text-align: right;
+    border-right: 1px solid #131313;
+}
+
+.menu__toggle {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: #000000;
+    cursor: pointer;
+}
+
+/* Navigation menu styles */
+.header__menu {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+.menu__item {
+    margin: 0 10px;
+    color: #131313!important;
+
+}
+.menu__item a{ color: #131313!important;}
+
+.menu__link {
+    text-decoration: none;
+    color: #111111;
+    transition: color 0.3s ease-in-out;
+}
+
+.menu__link.active,
+.menu__link:hover {
+    color: #0056b3;
+}
+
+/* Mobile view styles */
+@media screen and (max-width: 600px) {
+    .menu__toggle {
+        color: #000000;
+        display: block;
+    }
+    header h1 {
+        margin-right: 20%;
+    }
+
+    .header__menu {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 3px;
+        left: 0;
+        right: 0;
+        background-color: #ffffff;
+        text-align: center;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease-in-out;
+    }
+
+    .header__menu.active {
+        max-height: 300px; /* Adjust the max-height as needed */
+        transition: max-height 0.3s ease-in-out;
+    }
+
+    .menu__toggle.active {
+        color: #000000;
+        transform: rotate(90deg);
+    }
+
+    body.menu-active {
+        padding-top: 130px; /* Adjust the padding-top to match the max-height of the menu */
+        transition: padding 0.3s ease-in-out;
+    }
+}
+.content{
+     padding-top: 8em;
+}
+/*logo sect*/
+.logo_image{
+
+  position: absolute;
+  top: -7;
+  right: 0;
+  z-index: -1;
+}
+.logo_image img{
+     width: 15em;
+    height: 15em;
+}
+
+
+/* Stats section styles */
+.stats-section {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+.startsrow{
+    margin: auto;
+    width: 80%;
+    display: flex;
+justify-content: space-between;
+        flex-wrap: wrap;
+
+}
+.project_card{
+       position: relative;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    width: 98%;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid rgba(0,0,0,.125);
+    /* border-radius: 0.25rem; */
+    /* height: 7em; */
+    height: fit-content;
+    /* border: 1px solid #dee2e6; */
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 1rem;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    flex-direction: column !important;
+}
+/*.recent-projects-section{*/
+/*    margin-left: auto;*/
+/*    margin-right: auto;*/
+
+/*}*/
+.project_card_text{
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    font-weight: bold;
+}
+.row_project_card{
+    display: flex;
+    flex-wrap: wrap;
+}
+.project_card img{
+    width: 100%;
+    max-height: 15em;
+
+}
+
+.list-group{
+    /*background-color: #4ac1f7;*/
+       margin: auto;
+    align-items: center;
+
+}
+.list-group-item{
+    margin: auto;
+}
+.card {
+    position: relative;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: row;
+    width: 98%;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid rgba(0,0,0,.125);
+    /*border-radius: 0.25rem;*/
+    flex-wrap: nowrap;
+    /*height: 7em;*/
+    height: fit-content;
+    /*border: 1px solid #dee2e6;*/
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 1rem;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+.users_cardbody {
+    /*background-color: #fbf187;*/
+    display: flex;
+    /*padding: 0.25rem;*/
+    gap: 13px;
+    width: 100%!important;
+    height: fit-content;
+    text-align: center;
+   margin: auto;
+
+}
+
+.card-text{
+text-align: center;
+ margin-left: auto;
+    margin-right: auto;
+}
+.card:hover {
+    transform: scale(1.02);
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.2);
+}
+
+.card-title {
+    font-size: 1.2rem;
+    color: #333; /* Adjust text color */
+}
+.bold {
+    display: block;
+    margin: auto;
+    font-weight: bold;
+}
+.card-text {
+    font-size: 1rem;
+    color: #666; /* Adjust text color */
+}
+.users_avatar {
+    /*margin-top: 1.5em;*/
+    margin-right: 2em;
+    vertical-align: middle;
+    width: 70px;
+    height: 70px;
+  border-radius: 50%;
+}
+
+/* Recent projects and upcoming hackathons styles */
+.recent-projects-section,
+.upcoming-hackathons-section,
+.recent-activities-section {
+    margin-top: 2rem;
+}
+
+.list-group-item {
+    font-size: 1rem;
+    border: none;
+    padding: 10px;
+    border-radius: 8px;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.list-group-item:hover {
+    background-color: #f8f9fa;
+}
+
+.highlight {
+    border: 2px solid yellow;  /* Change the border color as needed */
+    /* Add any other styling for highlighted elements */
+}
+
+/* User section styles */
+.user-list-container {
+    max-height: 300px; /* Adjust the max height as needed */
+    overflow-y: auto;
+}
+
+.user-list {
+  padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    /* overflow-x: auto; */
+    gap: 10px;
+    flex-direction: column;
+
+}
+
+.user-card {
+     flex: 1 0 calc(25% - 20px);
+    height: 100%; /* Ensure equal height */
+    margin-bottom: 20px;
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    text-align: center;
+    display: flex;
+    flex-direction: column; /* Ensure equal height */
+}
+.user-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+}
+.user-card.level-0 {
+    border-color: #fff;
+}
+
+.user-card.level-1,
+.user-card.level-2 {
+    border-color: #ff6868;
+}
+
+.user-card.level-4,
+.user-card.level-5 {
+    border-color: #68a4ff;
+}
+.user-avatar {
+   width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-bottom: 15px;
+    border: 4px solid #fff;
+    align-self: center; /* Center the avatar horizontally */
+
+}
+
+.user-item {
+    flex: 1 0 calc(25% - 20px);
+    margin-right: 20px; /* Adjust the margin as needed */
+}
+
+.user-details {
+    margin-top: 1rem;
+}
+
+.user-username {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+    color: #333; /* Adjust text color */
+
+}
+
+.user-info {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+    color: #666; /* Adjust text color */
+
+}
+.user-list{
+    background-color: #eaedee;
+    width:100% ;
+}
+.user-section {
+    margin-top: 2rem;
+}
+
+/* Search section styles */
+.search-section {
+    margin-top: 20px; /* Adjust the top margin as needed */
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    max-width: 20%;
+}
+
+/* Style the heading */
+.search-section h2 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+}
+
+/* Style the form */
+#searchForm {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Style the search input */
+#searchInput {
+    flex: 1;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+/* Style the search button */
+#searchForm button {
+    padding: 8px 15px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+/*  hover effect to the search button */
+#searchForm button:hover {
+    background-color: #0056b3;
+}
+
+/* Graph section styles */
+.graph-section {
+    margin-top: 2rem;
+    padding: 20px;
+    background: linear-gradient(to right, #f8f9fa, #f8f9fa, #e9ecef);
+    border: 1px solid #dee2e6;
+    border-radius: 12px;
+    transition: transform 0.3s ease-in-out;
+}
+
+.graph-section:hover {
+    transform: scale(1.02);
+}
+#projectCountChart {
+    width: 100%;
+    max-width: 600px; /* Adjust the maximum width as needed */
+    margin: 0 auto; /* Center the chart horizontally */
+}
+
+/* Color scheme explanation styles */
+.color-scheme-section {
+    margin-top: 2rem;
+    margin-left: 2rem;
+}
+
+.color-scheme-section h2 {
+    margin-bottom: 1rem;
+}
+
+.activity-list {
+    margin-left: auto;
+    margin-right: auto;
+    overflow-x: auto; /* Set the overflow to vertical */
+    /*max-width: 200px; !* Set a maximum height to enable scrolling *!*/
+     background-color: #fff;
+    border: 1px solid #dee2e6;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 1rem;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.list-group {
+    gap: 2em;
+    display: flex;
+    flex-direction: row; /* Set the flex direction to column */
+
+}
+
+.list-group-item {
+    margin-bottom: 10px; /* Adjust the margin between items */
+}
+
+.activity-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+     background-color: #fff;
+    border: 1px solid #dee2e6;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 1rem;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.activity-category {
+    font-weight: bold;
+}
+
+.activity-title {
+    font-size: 1.2em;
+}
+
+.activity-time {
+    color: #888;
+}

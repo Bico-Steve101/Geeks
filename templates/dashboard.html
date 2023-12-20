@@ -1,0 +1,273 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+    <!-- Add your other CSS or head elements here -->
+</head>
+<body>
+
+<div class="container-fluid">
+ <header class="  p-4">
+            <h1>Geeks Dashboard</h1>
+
+            <!-- Mobile menu toggle button -->
+            <button class="menu__toggle">&#9776;</button>
+
+            <!-- Navigation menu -->
+            <ul class="header__menu">
+                <li class="menu__item">
+                    <a href="{% url 'last:index' %}" class="menu__link active">Home</a>
+                </li>
+                <li class="menu__item">
+                    <a href="{% url 'last:all_projects' %}" class="menu__link">Projects</a>
+                </li>
+                <li class="menu__item">
+                    <a href="{% url 'last:members' %}" class="menu__link">Members</a>
+                </li>
+                <li class="menu__item">
+                    <a href="{% url 'last:all_hackathons' %}" class="menu__link">Hackathons</a>
+                </li>
+                <li class="menu__item">
+                    <a href="{% url 'last:index' %}" class="menu__link">Contact</a>
+                </li>
+             <li class="menu__item">
+                            <a href="{% url 'last:dashboard' %}" class="menu__link">Dashboard</a>
+                        </li>
+                {% if request.user.is_authenticated %}
+                <li class="menu__item">
+                    <a href="{% url 'last:profile' user.id %}">Profile</a>
+                </li>
+                {% endif %}
+                <li class="menu__item">
+                    <!-- Uncomment this line if you want a separate link for 'Hackathons' -->
+{#                    <!-- <a href="{% url 'last:hackathons' %}" class="menu__link">Hackathons</a> -->#}
+                </li>
+            </ul>
+ </header>
+
+<div  class="content">
+    <section class="logo_image">
+        <img src="{% static 'img/dashboardlogo.png' %}" alt="">
+    </section>
+   <!-- Search Bar -->
+ <!-- Search Section -->
+    <section class="search-section mt-4">
+{#        <h2>Search</h2>#}
+        <form id="searchForm" method="get" action="{% url 'last:dashboard' %}">
+            <input type="text" name="search" id="searchInput" placeholder="Search...">
+            <button type="submit">Search</button>
+        </form>
+    </section>
+
+    <section class="stats-section mt-4">
+        <div class="row startsrow">
+            <div class="col-md-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Total Users</h5>
+                        <p class="card-text">{{ user_count }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Project Count</h5>
+                        <p class="card-text">{{ project_count }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Hackathon Count</h5>
+                        <p class="card-text">{{ hackathon_count }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Active Users (last 30 days)</h5>
+                        <p class="card-text">{{ active_user_count }}</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!-- Color Scheme Explanation -->
+       <div class="color-scheme-section mt-4">
+            <h2>Color Scheme Explanation</h2>
+            <ul>
+                <li><span class="badge badge-light">0 Projects</span> White</li>
+                <li><span class="badge badge-danger">1-2 Projects</span> Red</li>
+                <li><span class="badge badge-primary">4-5 Projects</span> Blue</li>
+                <!-- Add more levels as needed -->
+            </ul>
+        </div>
+    </section>
+
+    <section class="recent-projects-section mt-4">
+         <h2>Recent Projects</h2>
+            <div class="row row_project_card">
+                {% for project in recent_projects %}
+                    <div class="col-md-4 {% if project.title == highlight_project %}highlight{% endif %}">
+                        <div class="card project_card">
+                            <img src="{{ project.image.url }}" class="card-img-top" alt="{{ project.title }} Image">
+                            <div class="card-body project_card_text">
+                                <h5 class="card-title color">{{ project.title }}</h5>
+                                <p class="card-text color">{{ project.description }}</p>
+                                <p class="card-text "><small class="text-muted color">Created {{ project.time_since_created }}</small></p>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+    </section>
+
+    <section class="upcoming-hackathons-section mt-4">
+        <h2>Upcoming Hackathons</h2>
+            <div class="row">
+                {% for hackathon in upcoming_hackathons %}
+                    <div class="col-md-4 {% if hackathon.name == highlight_hackathon %}highlight{% endif %} ">
+                        <div class="card project_card">
+                            <img src="{{ hackathon.image.url }}" class="card-img-top" alt="{{ hackathon.name }} Image">
+                            <div class="card-body project_card_text">
+                                <h5 class="card-title">{{ hackathon.name }}</h5>
+                                <p class="card-text">{{ hackathon.theme }}</p>
+                                <p class="card-text"><small class="text-muted">Starts {{ hackathon.time_until_start }}</small></p>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+    </section>
+
+   <section class="recent-activities-section mt-4">
+    <h2>Recent Activities</h2>
+    <div class="activity-list">
+        <ul class="list-group">
+            {% for activity in recent_activities %}
+                <li class="list-group-item">
+                    <div class="activity-item">
+                        <div class="activity-category color">{{ activity.category }}</div>
+                        <div class="activity-details color">
+                            <div class="activity-title color">{{ activity.title }}</div>
+                            <div class="activity-time color">{{ activity.time_since }} </div>
+                        </div>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+</section>
+
+<!-- New User Section -->
+<section class="user-section mt-4" id="user-section">
+    <h2>Users</h2>
+    <div class="user-list-container">
+        <ul class="user-list">
+            {% for user in users %}
+                <li class="user-item {% if user.username == highlight_user %}highlight{% endif %}">
+                    <!-- Add 'highlight' class if it matches the search result -->
+                    <div class="card">
+                        <img src="{{ user.avatar.url }}" class="card-img-top users_avatar" alt="{{ user.username }} Avatar">
+                        <div class="card-body  users_cardbody">
+                            <h5 class="card-title bold"> <a href="{% url 'last:profile' user.id %}">{{ user.username }}</a></h5>
+                            <p class="card-text bold">{{ user.tag }}</p>
+                            <p class="card-text bold">Project Count: {{ user.projects.count }}</p>
+                            <p class="card-text bold">Hackathon Count: {{ user.hackathon_founder.count }}</p>
+                            <p class="card-text bold">Date Joined: {{ user.joined|date }}</p>
+                            <!-- Add more user information as needed -->
+                        </div>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+</section>
+<!-- Highlighted Project Section -->
+<section class="highlighted-project-section mt-4" id="highlighted-project-section">
+    {% if highlight_project %}
+        <h2>Highlighted Project</h2>
+        <!-- Add the content for the highlighted project -->
+    {% endif %}
+</section>
+
+<!-- Highlighted Hackathon Section -->
+<section class="highlighted-hackathon-section mt-4" id="highlighted-hackathon-section">
+    {% if highlight_hackathon %}
+        <h2>Highlighted Hackathon</h2>
+        <!-- Add the content for the highlighted hackathon -->
+    {% endif %}
+</section>
+
+    <!-- Graph Section -->
+    <section class="graph-section mt-4">
+        <h2>Graph Section</h2>
+        <!-- Bar chart canvas -->
+        <canvas id="projectCountChart" width="400" height="200"></canvas>
+        <script>
+            // Data for the chart
+            var userData = JSON.parse('{{ user_data_json|escapejs }}');
+            var labels = userData.map(function(user) { return user.username; });
+            var projectCounts = userData.map(function(user) { return user.projects_count; });
+
+            // Create a bar chart
+            var ctx = document.getElementById('projectCountChart').getContext('2d');
+            var myChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Project Count',
+                        data: projectCounts,
+                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        </script>
+    </section>
+<!-- End Graph Section -->
+    <!-- Add more sections or content as needed -->
+</div>
+</div>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // Check if there's an anchor in the URL
+        var urlParams = new URLSearchParams(window.location.search);
+        var anchor = urlParams.get("anchor");
+
+        if (anchor) {
+            // Scroll to the element with the specified ID
+            var element = document.getElementById(anchor);
+            if (element) {
+                element.scrollIntoView({ behavior: "smooth" });
+            }
+        }
+    });
+</script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="{% static 'js/dashboard.js' %}"></script>
+<script src="{% static 'js/mobile.js' %}"></script>
+<!-- Add your other scripts or body elements here -->
+
+</body>
+</html>

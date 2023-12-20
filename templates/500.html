@@ -1,0 +1,44 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="{% static '/css/error.css' %}">
+  <title>Your Page Title</title>
+</head>
+<body>
+
+<section class="content">  
+  <section class="loader_section" id="loaderSection">
+    <div class="loader">
+      <div style="--i: 1"></div>
+      <div style="--i: 2"></div>
+      <div style="--i: 3"></div>
+      <div style="--i: 4"></div>
+    </div>
+    <img src="{% static 'img/imageload.png' %}" alt="">
+  </section>
+  <section class="wrap-error">
+  <div>
+    <div class="d-flex align-items-center h-100">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-8 offset-sm-2 text-center text-white">
+            <h1 class=""><span>5</span><span>0</span><span>0</span></h1>
+            <h5 class="">Oops! Internal Server Error</h5>
+            <p class="mb-4">we are sorry, but the server encountered an unexpected error</p>
+            <button class="btn btn-dark" href="/" title="home url">
+              Go Home
+              </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </section>
+  </section>
+
+</body>
+</html>

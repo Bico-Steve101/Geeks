@@ -1,0 +1,123 @@
+/*users*/
+.users, .member__user {
+    margin-top: 5rem;
+  }
+  
+  .users__head {
+    position: relative;
+    margin: auto;
+  }
+  
+  .users__quote {
+    position: absolute;
+    top: 0;
+    left: 0;
+    max-height: 11rem;
+    width: auto;
+  }
+  
+  .users__title {
+    font-size: 3.6rem;
+    max-width: 45rem;
+  }
+  
+  .users__body {
+    /* margin: 8rem auto 4rem; */
+    width: 100%;
+    overflow: hidden;
+    padding: 2rem 2rem;
+    position: relative;
+  }
+  
+  .users__body::before, .users__body::after {
+    position: absolute;
+    content: '';
+    top: 0;
+    width: 10%;
+    background-color: #ffffff;
+    opacity: .5;
+    height: 100%;
+    z-index: 1;
+  }
+  
+  .users__body::before {
+    left: 0;
+    filter: drop-shadow(5rem 0 4rem #ffffff);
+  }
+  
+  .users__body::after {
+    right: 0;
+    filter: drop-shadow(-5rem 0 4rem #ffffff);
+  }
+  
+  .user__list {
+    display: grid;
+    grid-template-columns:  1fr 1fr 1fr;
+    grid-gap: 2.5rem;
+    position: relative;
+  }
+  
+  .user {
+    flex-shrink: 0;
+    padding: 2.5rem;
+    background-color: #ffffff;
+    filter: drop-shadow(0 0 0.75rem rgba(27, 31, 35, 0.15));
+    transition: transform .3s ease;
+  }
+  
+  .user:hover {
+    transform: scale(1.1);
+    z-index: 1;
+  }
+  
+  .user__profile {
+    text-align: center;
+    margin-left: auto;
+    display: grid;
+    grid-gap: 2.5rem;
+    align-items: center;
+    font-size: 1.8rem;
+  }
+  
+  .user__img {
+    filter: drop-shadow(0 0 0.5rem #fbf428);
+    /* width: 2px; */
+    /* height: 2px; */
+    border-radius: 50%;
+  }
+  
+  .user__img img {
+    width: 3em;
+    height: 3em;
+    border-radius: 50%;
+  }
+  
+  .user__name {
+    color: #bdbd4c;
+  }
+  
+  .user__title {
+    color: #263238;
+  }
+  
+  .user__description {
+    margin-top: 5rem;
+    font-size: 1.8rem;
+    color: #324148;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .edit{
+    color:#bdbd4c ;
+    margin-top: 1em;
+    float: right;
+    
+  }
+  
+  
+  /*End Testimonials*/
+.empty{
+  width:40%;
+  margin-left: auto;
+  margin-right: auto;
+}

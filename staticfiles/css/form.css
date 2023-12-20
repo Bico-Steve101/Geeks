@@ -1,0 +1,212 @@
+body {
+  width: 100%;
+  align-items: center;
+  background-color: #ffffff;
+  display: inline-block;
+  justify-content: center;
+  max-height: 40em;
+}
+
+.form {
+  margin-top: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  background-color:#bbb466;
+  border-radius: 20px;
+  box-sizing: border-box;
+  max-height: 770px;
+  padding: 20px;
+  width: 320px;
+}
+
+.title {
+  text-align: center;
+  /* margin-right: auto; */
+  color: #f4f4f4;
+  font-family: sans-serif;
+  font-size: 36px;
+  font-weight: 600;
+  margin-top: 10px;
+
+}
+
+.subtitle {
+  color: #eee;
+  font-family: sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  margin-top: 10px;
+}
+
+.input-container {
+  height: 50px;
+  position: relative;
+  width: 100%;
+}
+
+.ic1 {
+  margin-top: 20px;
+}
+
+.ic2 {
+  margin-top: 20px;
+}
+
+.input {
+  background-color: #ffffff;
+  border-radius: 12px;
+  border: 0;
+  box-sizing: border-box;
+  color: #131313;
+  font-size: 18px;
+  height: 100%;
+  outline: 0;
+  padding: 4px 20px 0;
+  width: 100%;
+}
+
+.cut {
+  background-color: #bbb466;
+  border-radius: 10px;
+  height: 20px;
+  left: 20px;
+  position: absolute;
+  top: -20px;
+  transform: translateY(0);
+  transition: transform 200ms;
+  min-width: 76px;
+
+}
+.confirm{
+  background-color: #bbb466;
+  border-radius: 10px;
+  height: 20px;
+  left: 20px;
+  position: absolute;
+  top: -20px;
+  transform: translateY(0);
+  transition: transform 200ms;
+  min-width: 276px;
+}
+
+.cut-short {
+  min-width: 120px;
+}
+
+.input:focus ~ .cut,
+.input:not(:placeholder-shown) ~ .cut {
+  transform: translateY(8px);
+}
+
+.placeholder {
+  color: #65657b;
+  font-family: sans-serif;
+  left: 20px;
+  line-height: 14px;
+  pointer-events: none;
+  position: absolute;
+  transform-origin: 0 50%;
+  transition: transform 200ms, color 200ms;
+  top: 20px;
+}
+
+.input:focus ~ .placeholder,
+.input:not(:placeholder-shown) ~ .placeholder {
+  transform: translateY(-30px) translateX(10px) scale(0.75);
+}
+
+.input:not(:placeholder-shown) ~ .placeholder {
+  color: #808097;
+}
+
+.input:focus ~ .placeholder {
+  color: #f5eff0;
+}
+
+.submit {
+  background-color: #08d;
+  border-radius: 12px;
+  border: 0;
+  box-sizing: border-box;
+  color: #eee;
+  cursor: pointer;
+  font-size: 18px;
+  height: 50px;
+  margin-top: 10px;
+  // outline: 0;
+  text-align: center;
+  width: 100%;
+  border: 1px solid #bbb766;
+  color: #838383;
+  font-size: 1.8rem;
+  box-shadow: 1px 5px 20px -10px #66bb6a;
+  /*
+    Button hover effect resource
+    https://codepen.io/alticreation/pen/zBZwOP
+    */
+  display: inline-block;
+  transition: all .3s;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.submit:after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #fafa6e;
+  z-index: -2;
+}
+
+.submit:before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0%;
+  height: 100%;
+  background-color: #ffffff;
+  transition: all .3s;
+  z-index: -1;
+}
+
+.submit:hover {
+  color: #bbb466;
+}
+
+.submit:hover:before {
+  width: 100%;
+}
+
+.names_section{
+  display: grid;
+  grid-gap: 4px;
+  grid-template-columns: auto auto;
+}
+p{
+  margin-top: 10px;
+  color: #fff;
+}
+.back_home{
+  text-align: center;
+  color: #fff;
+  margin-top: 10px;
+}
+a{
+  color: #e3e0e0;
+  text-decoration: underline;
+}
+li{
+  margin-top: 10px;
+  color: #fff;
+}
+.footer{
+  border-top: 2px solid #e3e0e0;
+  margin-bottom: 2px;
+  margin-top: 20px;
+  height: 10px !important;
+}

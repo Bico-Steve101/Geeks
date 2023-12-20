@@ -1,0 +1,277 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, 
+    initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>Zou Farm</title>
+    <link rel="icon" type="image/png" href="{% static 'img/logo.svg'%}">
+    <link rel="stylesheet" href="{% static '/css/members.css'%}">
+    <link rel="stylesheet" href="{% static  '/css/user.css'%}">
+    <link  rel="stylesheet" 
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" 
+    integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" 
+    crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="{% static '/css/main.css'%}">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <nav class="header__nav w-120">
+                <div class="header__logo">
+                   <a href="/"> <img src="{% static '/img/logo2.png' %}" alt="Logo"></a>
+                </div>
+                <div class="header__nav__content">
+                    <div class="nav-close-icon"></div>
+                    <ul class="header__menu">
+                        <li class="menu__item">
+                            <a href="#" class="menu__link active">Home</a>
+                        </li>
+                        <li class="menu__item">
+                            <a href="#" class="menu__link">About</a>
+                        </li>
+                        <li class="menu__item">
+                            <a href="#" class="menu__link">Projects</a>
+                        </li>
+                        <li class="menu__item">
+                            <a href="#" class="menu__link">Team</a>
+                        </li>
+                        <li class="menu__item">
+                            <a href="#" class="menu__link">Contact</a>
+                        </li>
+                         <li class="menu__item">
+                            <a href="{% url 'last:dashboard' %}" class="menu__link">Dashboard</a>
+                        </li>
+                    </ul>
+                    <div class="header__signup">
+                        <a href="#" class="btn btn__signup">
+                            <i class="fas fa-user-plus"></i> Sign Up
+                        </a>
+                    </div>
+                </div>
+
+                <div class="hamburger-menu-wrap">
+                    <div class="hamburger-menu">
+                        <div class="line"></div>
+                        <div class="line"></div>
+                        <div class="line"></div>
+                        <div class="line"></div>
+                    </div>
+                </div>
+            </nav>
+        </header>
+        <section class="member__user">
+            <div class="member__user__content">
+                <div class="member__user__body">
+                    <div class="member__user__list">
+                        <div class="userr">
+                            <div class="user__profile">
+                                <div class="user__img">
+                                    <img src="{% static '/img/testimonials/test.png'%}" alt="Testimonial">
+                                </div>
+                                <div class="user__info">
+                                    <h4 class="user__name"> Bico Steve </h4>
+                                    <h4 class="user__title">Backend Developer </h4>
+                                </div>
+                                <div class="edit">
+                                    <i class="fa-solid fa-pen"></i>
+                                    <i class="fa-regular fa-trash-can"></i>
+                                </div>
+                            </div>
+                            <p class="user__description">
+                                A third year computer science student who is passionate about 
+                                computing, and enjoys learning new staff.
+                            </p>
+                            <div class="edit">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="socials">
+            <div class="socials__img">
+                <img src="{% static '/img/laptop2.png' %}" alt="">
+            </div>
+            <div class="socials__content w-105">
+                <div class="socials__head">
+                    <h2 class="socials__title">Connect with Me</h2>
+                    <p class="socials__description">
+                        Below are some of my accounts lets connect.
+                    </p>
+                </div>
+                <div class="socials__body">
+                    <div class="social">
+                        <img src="{% static '/img/opportunites/opportunity-1.svg'%}" 
+                        alt="github" class="social__icon">
+                        <h4 class="social__title"><a href="">GitHub</a></h4>
+                    </div>
+
+                    <div class="social active">
+                        <img src="{% static '/img/opportunites/opportunity-2.svg'%}" alt="Icon" class="opportunity__icon">
+                        <h4 class="social__title">Instagram</h4>
+                    </div>
+                    <div class="social">
+                        <img src="{% static '/img/opportunites/opportunity-3.svg'%}" alt="Icon" class="opportunity__icon">
+                        <h4 class="social__title">Twitter
+                        </h4>
+                    </div>
+                    <div class="social active">
+                        <img src="{% static '/img/opportunites/opportunity-2.svg'%}" alt="Icon" class="opportunity__icon">
+                        <h4 class="social__title">Dev</h4>
+                    </div>
+                    <div class="social">
+                        <img src="{% static '/img/opportunites/opportunity-3.svg'%}" alt="Icon" class="opportunity__icon">
+                        <h4 class="social__title">HackerRank
+                        </h4>
+                    </div>
+                    <div class="social active">
+                        <img src="{% static '/img/opportunites/opportunity-2.svg'%}" alt="Icon" class="opportunity__icon">
+                        <h4 class="social__title">Dev</h4>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="invest  w-105">
+            <div class="invest__content">
+                <div class="invest__head">
+                    <h2 class="invest__title">Some of Steve's Projects and Hackathons</h2>
+                    <p class="invest__description">Below are some of the collaborative 
+                        projects that the team members have done some are hosted live 
+                        while others are not. Because of the costa of hosting projects 
+                        come with but check them out and you can contact us for any info 
+                        on what we should improve or have done better.  </p>
+                </div>
+                <div class="invest__body">
+                    <div class="invest__item">
+                        <div class="invest__item__head">
+                            <h5 class="invest__item__subtitle">1st Jan-2023</h5>
+                        </div>
+                        <div class="invest__item__body">
+                            <h4 class="invest__item__title">Reserve Room</h4>
+                            <p class="invest__item_description">
+                                The Website allows you to reserve a hotel room prior 
+                                to your travel.Saving you of the hustle.
+                            </p>
+                        </div>
+                        <div class="invest__item__footer">
+                            <a href="#" class="btn btn__invest">Check It Out</a>
+                        </div>
+                    </div>
+                    <div class="invest__item">
+                        <div class="invest__item__head">
+                            <h5 class="invest__item__subtitle">3rd Feb-2023</h5>
+                        </div>
+                        <div class="invest__item__body">
+                            <h4 class="invest__item__title">Study Manager
+                            </h4>
+                            <p class="invest__item_description">
+                                The website is meant to make learning easy and fun, 
+                                helping you manage your progress.It's also meant to 
+                                keep students on track.
+                            </p>
+                        </div>
+                        <div class="invest__item__footer">
+                            <a href="#" class="btn btn__invest">Check It Out</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="farm-invest w-105">
+            <h2 class="farm-invest__title">Be Sure to Join <span>Geeks Team</span> so that We can Learn and Practice Together.</h2>
+            <a href="#" class="btn btn__farm--invest">Sign up Now</a>
+
+        </section>
+
+        <footer class="footer">
+            <div class="footer__body w-105">
+                <nav class="footer__nav">
+                    <ul class="footer_nav__menu">
+                        <li class="footer_nav__item">
+                            <h4 class="footer_nav__menu__title">COMPANY</h4>
+                        </li>
+                        <li class="footer_nav__item">
+                            <a href="#" class="footer_nav__link">About Us</a>
+                        </li>
+                        <li class="footer_nav__item">
+                            <a href="#" class="footer_nav__link">Team</a>
+                        </li>
+                        <li class="footer_nav__item">
+                            <a href="#" class="footer_nav__link">Careers</a>
+                        </li>
+                        <li class="footer_nav__item">
+                            <a href="#" class="footer_nav__link">Contact</a>
+                        </li>
+                    </ul>
+                    <ul class="footer_nav__menu">
+                        <li class="footer_nav__item">
+                            <h4 class="footer_nav__menu__title">INVEST</h4>
+                        </li>
+                        <li class="footer_nav__item">
+                            <a href="#" class="footer_nav__link">Features</a>
+                        </li>
+                        <li class="footer_nav__item">
+                            <a href="#" class="footer_nav__link">How it works</a>
+                        </li>
+                        <li class="footer_nav__item">
+                            <a href="#" class="footer_nav__link">Pricing</a>
+                        </li>
+                        <li class="footer_nav__item">
+                            <a href="#" class="footer_nav__link">Login</a>
+                        </li>
+                    </ul>
+                    <ul class="footer_nav__menu">
+                        <li class="footer_nav__item">
+                            <h4 class="footer_nav__menu__title">LEGAL</h4>
+                        </li>
+                        <li class="footer_nav__item">
+                            <a href="#" class="footer_nav__link">Privacy</a>
+                        </li>
+                        <li class="footer_nav__item">
+                            <a href="#" class="footer_nav__link">Terms</a>
+                        </li>
+                        <li class="footer_nav__item">
+                            <a href="#" class="footer_nav__link">Security</a>
+                        </li>
+                    </ul>
+                </nav>
+                <div class="footer__contact">
+                    <h5 class="footer__contact__title">Geeks Team</h5>
+                    <span>Write email to us</span>
+                    <form action="">
+                        <input type="text" name="name" placeholder="Enter Name">
+                        <input type="email" name="email" placeholder="Enter Email">
+                        <textarea name="message" id="" cols="30" rows="10" placeholder="Enter Message"></textarea>
+                        <a href="#" class="btn btn__signin">
+                            <i class="fas fa-paper-plane"></i> Send
+                        </a>
+                    </form>   
+                <small>Phone: 0757838398</small>
+                </div>
+            </div>
+            <div class="footer__bottom">
+                <div class="footer__bottom__content w-105">
+                    <div class="footer__logo">
+                        <img src="{% static '/img/logo.png'%}" alt="Logo">
+                    </div>
+                    <p class="footer_copyright">
+                        © Copyright 2023. Geeks By Steve Rebrand.
+                    </p>
+                </div>
+                <img src="{% static '/img/down.png'%}" alt="Down" class="footer_img">
+            </div>
+        </footer>
+    </div>
+    <script src="{% static '/js/main.js' %}" type="module"></script>
+
+</body>
+
+</html>

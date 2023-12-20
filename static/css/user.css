@@ -1,0 +1,161 @@
+.member__user__body {
+    /* background-color: red; */
+    margin: auto;
+    /* margin: 8rem auto 4rem; */
+    width: 100%;
+    overflow: hidden;
+    padding: 2rem 2rem;
+    /* position: relative; */
+  }
+  .member__user__list{
+    padding: 5rem 2.5rem 3.5rem;
+    text-align: center;
+    max-height: 10em;
+    .edit{
+        margin-top:-0.1em;
+    }
+   
+  }
+  .edit i{
+    padding: 3px;
+ }
+  
+  .member__user__body::before, .users__body::after {
+    position: absolute;
+    content: '';
+    top: 0;
+    width: 10%;
+    background-color: #ffffff;
+    opacity: .5;
+    height: 100%;
+    z-index: 1;
+  }
+  
+  .member__user__body::before {
+    left: 0;
+    filter: drop-shadow(5rem 0 4rem #ffffff);
+  }
+  
+  .member__user__body::after {
+    right: 0;
+    filter: drop-shadow(-5rem 0 4rem #ffffff);
+  }
+.socials {
+    position: relative;
+    margin: auto;
+  }
+  
+  .socials__img {
+    position: absolute;
+    left: -1.5rem;
+    top: -16rem;
+    z-index: -1;
+  }
+  
+  .socials__img img {
+    max-height: 55rem;
+    max-width: 16rem;
+  }
+  
+  .socials__content {
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 5rem;
+    border-bottom: 2px solid #f7f7f7;
+    margin-bottom: 4rem;
+  }
+  
+  .socials__head {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    max-width: 70rem;
+    margin-bottom:3rem;
+  }
+  
+  .socials__title {
+    font-size: 3.6rem;
+    color: #000000;
+  }
+  
+  .socials__description {
+    margin-top: 2.5rem;
+    font-size: 1.8rem;
+    font-weight: 400;
+    color: #263238;
+  }
+  
+  .socials__body {
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    flex-wrap: wrap;
+    grid-gap: 2.5rem;
+    align-self: baseline;
+  }
+
+  .social:hover {
+    transform: translateY(-2rem);
+  }
+  
+  .social__icon {
+    max-height: 5.6rem;
+    width: initial;
+  }
+  
+  .social__title {
+    font-size: 1.8rem;
+    color: #263238;
+    margin: 2.5rem 0;
+  }
+  
+  .social__description {
+    font-size: 1.6rem;
+    font-weight: 400;
+    color: #263238;
+  }
+  
+  /*End Opportunities*/
+
+.cards {
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    flex-wrap: wrap;
+    grid-gap: 2.5rem;
+    align-self: baseline;}
+
+.card {
+  margin: 10px;
+  width: 250px;
+  background: #fff;
+  border-radius: 5px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+    filter: drop-shadow(0 0 0.75rem rgba(27, 31, 35, 0.15));
+    transition: all 0.3s ease-out;
+  .image {
+    img {
+      max-width: 100%;
+      border-top-left-radius: 5px;
+      border-top-right-radius: 5px;
+    }
+  }
+  .image2{
+    height: 180px;
+  }
+
+  .content {
+    padding:30px 70px 30px;
+     font-size: 1.6rem;
+    font-weight: 400;
+    color: #263238;
+  }
+}
+.empty{
+  width:40%;
+  margin-left: auto;
+  margin-right: auto;
+}

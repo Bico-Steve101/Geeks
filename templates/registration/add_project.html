@@ -1,0 +1,96 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Project</title>
+</head>
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="{% static '/css/edit-form.css' %}">
+  <link rel="stylesheet" href="{% static '/css/footer.css' %}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/css/bootstrap.min.css">  -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/js/bootstrap.bundle.min.js">
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+</head>
+<body>
+
+    <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+  <div class="container">
+    <div class="row">
+        <div class="column_one">
+          <div class="d-flex flex-column align-items-center text-center ">
+            <img id="imagePreview" alt="Image Preview" src="{% static 'img/No-Image-Placeholder.svg.png'%}" class="rounded_circle" >
+            <p class="font_name">Preview</p>
+          </div>
+          <div class="font_name">
+            {{ form.image }}
+          </div>
+          </div>
+        <div class="column_two">
+              {% if form.errors %}
+            <div class="alert">
+            <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+             {{ form.non_field_errors }}
+                 <ul>
+              {% for field in form %}
+              {% for error in field.errors %}
+              <li>{{ field.label }}: {{ error }}</li>
+              {% endfor %}
+               {% endfor %}
+                </ul>
+          </div>
+            {% endif %}
+
+          <div class=" class_main">
+                <div class="row_one">
+                      <div class="class_input">
+                        <label for="id_title" class="labels">Title:</label>
+                        <input name="title" id="id_title" type="text" class="class_input_text" placeholder="Enter project title" value="">
+                      </div>
+                      <div class="class_textarea">
+                        <label for="id_description" class="labels">Description: </label>
+                        <textarea name="description" id="id_description" class="class_textarea_text" placeholder="Enter project description" cols="30" rows="5"></textarea>
+                        </div>
+                        <div class="class_input">
+                          <label for="id_link" class="labels">Link:</label>
+                          <input name="link" id="id_link" type="text" class="class_input_text" placeholder="Enter project link" value="">
+                        </div>
+                </div>
+                <div class="row_two">
+                    <div class="class_textarea">
+                    <!-- </textarea> -->
+                      </div>
+                </div>
+          </div>
+        </div>
+      </div>
+      <div class="class_button_submit"><button class="class_button" type="submit">Save Profile</button></div>
+    </div>
+        </form>
+        <footer class="footer">
+        <p class="footer_copyright">
+                        © Copyright 2023. Geeks By Steve Rebrand.
+        </p>
+    </footer>
+
+       <script src="{%static '/js/edit-hackathon.js' %}" type="module"></script>
+</body>
+</html>
+
+{#<body>#}
+{#    <h1>Add Project</h1>#}
+{#    <form method="post" enctype="multipart/form-data">#}
+{#        {% csrf_token %}#}
+{#        {{ form.as_p }}#}
+{#        <button type="submit">Create Project</button>#}
+{#    </form>#}
+{#</body>#}
+</html>

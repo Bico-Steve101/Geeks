@@ -1,0 +1,106 @@
+{% load static %}
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Update Hackathon</title>
+</head>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+      <link rel="stylesheet" href="{% static '/css/footer.css' %}">
+  <link rel="stylesheet" href="{% static '/css/edit-form.css' %}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/css/bootstrap.min.css">  -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/js/bootstrap.bundle.min.js">
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+</head>
+<body>
+
+    <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+  <div class="container">
+    <div class="row">
+        <div class="column_one">
+            <div class="d-flex flex-column align-items-center text-center ">
+                <img id="imagePreview" alt="Image Preview" src="{{ hackathons.image.url }}" class="rounded_circle" >
+              </div>
+              <div class="font_name">
+                  {{ form.image }}
+              </div>
+
+          </div>
+        <div class="column_two">
+              {% if form.errors %}
+            <div class="alert">
+                <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                 {{ form.non_field_errors }}
+                 <ul>
+              {% for field in form %}
+              {% for error in field.errors %}
+              <li>{{ field.label }}: {{ error }}</li>
+              {% endfor %}
+               {% endfor %}
+                </ul>
+              </div>
+            {% endif %}
+          <div class=" class_main">
+                <div class="row_one">
+                      <div class="class_input">
+                        <label for="id_name" class="labels">Name:</label>
+                        <input required  id="id_name" type="text" class="class_input_text" name="name"  value="{{ hackathons.name }}">
+                      </div>
+                      <div class="class_textarea">
+                        <label for="id_theme" class="labels">Theme: </label>
+                        <textarea id="id_theme" class="class_textarea_text"  cols="30" name="theme" rows="5">{{ hackathons.theme }}</textarea>
+                        </div>
+                        <div class="class_textarea">
+                            <label for="id_rules" class="labels">Rules: </label>
+                            <textarea id="id_rules" class="class_textarea_text"  cols="30" name="rules" rows="5">{{ hackathons.rules }}</textarea>
+                            </div>
+                            <div class="class_textarea">
+                                <label for="id_prize" class="labels">Prize: </label>
+                                <textarea id="id_prize" class="class_textarea_text"  cols="30" name="prize" rows="5">{{ hackathons.prize }}</textarea>
+                                </div>
+                </div>
+                <div class="row_two">
+                    <div class="names_section">
+                        <div class="class_input">
+                            <label for="id_location" class="labels">Location:</label>
+                            <input id="id_location" type="text" class="class_input_text" name="location"  value="{{ hackathons.location }}" >
+                          </div>
+                        <div class="class_input">
+                            <label for="id_start_date" class="labels">Start:</label>
+                            <input id="id_start_date" type="datetime-local" class="class_input_text" name="start_date"  value="{{ hackathons.start_date }}">
+                          </div>
+                          <div class="class_input">
+                            <label for="id_end_date" class="labels">End:</label>
+                            <input id="id_end_date" type="datetime-local" class="class_input_text"  name="end_date" value="{{ hackathons.end_date }}">
+                          </div>
+                    </div>
+
+                    <div class="class_textarea">
+                    <!-- </textarea> -->
+                      </div>
+                </div>
+          </div>
+        </div>
+      </div>
+      <div class="class_button_submit"><button class="class_button" type="submit">Update Hackathon</button></div>
+    </div>
+    </form>
+        <footer class="footer">
+        <p class="footer_copyright">
+                        © Copyright 2023. Geeks By Steve Rebrand.
+        </p>
+    </footer>
+       <script src="{%static '/js/edit-form.js' %}" type="module"></script>
+           <script src="{%static '/js/edit-hackathon.js' %}" type="module"></script>
+
+</body>
+</html>
+

@@ -1,0 +1,9 @@
+.footer{
+    width: 100%;
+    margin-top:2em;
+    height: 2em !important;
+    text-align: center;
+}
+.footer_copyright{
+        color: rgba(79, 77, 77, 0.29);
+}

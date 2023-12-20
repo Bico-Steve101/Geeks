@@ -1,0 +1,27 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Confirm Profile Deletion</title>
+    <link rel="stylesheet" href="{% static 'css/delete.css' %}">
+      <link rel="stylesheet" href="{% static '/css/footer.css' %}">
+</head>
+<body>
+  <section class="delete">
+    <h2>Confirm Profile Deletion</h2>
+<div class="delete_section">
+  <p>Are you sure you want to delete the profile of <span class="caption">"{{ user.username }}"</span> ?</p>
+  <form method="post">
+    {% csrf_token %}
+    <input class="submit" type="submit" value="Confirm Delete">
+</form>
+<div class="cancel">
+<a  href="{% url 'last:index'  %}">Cancel</a>
+
+</div>
+</div>
+
+  </section>
+
+</body>
+</html>
