@@ -1,9 +1,25 @@
 .footer{
     width: 100%;
-    margin-top:2em;
+    margin-top:7em!important;
     height: 2em !important;
     text-align: center;
 }
 .footer_copyright{
         color: rgba(79, 77, 77, 0.29);
 }
+.logoutbody {
+            height: 70vh;
+            align-items: center;
+            justify-content: center;
+            margin: 0;
+        }
+        .logoutsect{
+            height: 23em;
+            background-color: rgba(187, 181, 102, 0.1);
+            margin-top: 7em;
+            width: 20em;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 3em;
+            border-radius: 10px;
+        }

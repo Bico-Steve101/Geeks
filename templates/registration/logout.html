@@ -1,22 +1,30 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <title>Logout</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static '/css/footer.css' %}">
 </head>
-<body>
-  <link rel="stylesheet" href="{% static '/css/footer.css' %}">
-<div class="container">
-    <h2>Logout</h2>
-    <p>You have been successfully logged out.</p>
-    <a href="{% url 'last:index' %}">Return To Home Page</a>
-    <br>
-    <a href="{% url 'login' %}">Login again</a>
-</div>
-    <footer class="footer">
+<body class="logoutbody">
+<section class="logoutsect">
+    <div class="container text-center">
+        <h2 class="mb-4">Logout</h2>
+        <p class="mb-3">You have been successfully logged out.</p>
+        <a href="{% url 'last:index' %}" class="btn btn-primary">Return To Home Page</a>
+        <br>
+        <a href="{% url 'login' %}" class="btn btn-secondary mt-2">Login again</a>
+    </div>
+</section>
+    <footer class="footer mt-5">
         <p class="footer_copyright">
-                        © Copyright 2023. Geeks By Steve Rebrand.
+            © Copyright 2023. Geeks By Steve Rebrand.
         </p>
     </footer>
 
+    <!-- Bootstrap JS and Popper.js (optional) -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-Uo7kor7t9aG6aI5VIOlG7s1sBS3m9z4APtzrH26HR4ELyAdzFbpeR/jAUnh6khB1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </body>
 </html>

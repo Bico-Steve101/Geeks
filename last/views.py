@@ -199,6 +199,7 @@ def hackathon_detail(request, hackathon_id):
 
     return render(request, 'hackathons.html', context)
 
+
 def download_hackathon_report(request, hackathon_id):
     hackathon = get_object_or_404(Hackathons, pk=hackathon_id)
     grades = Grade.objects.filter(hackathon=hackathon)
