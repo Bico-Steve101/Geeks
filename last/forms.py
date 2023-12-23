@@ -44,7 +44,7 @@ class ContactForm(forms.ModelForm):
 class GradeForm(forms.ModelForm):
     class Meta:
         model = Grade
-        fields = ['grade']  # Include other fields from the Grade model as necessary
+        fields = ['grade']
 
         # To provide a custom display in the form
         labels = {
@@ -59,7 +59,7 @@ class GradeForm(forms.ModelForm):
 
 GradeFormSet = forms.modelformset_factory(Grade, form=GradeForm, extra=0)
 
-# class ProfileForm(forms.ModelForm):
-#     # class Meta:
-#     model = User
-#     fields = ('user_email', 'user_name', 'description', 'describe_project', 'avatar')
+
+class GradeFormAll(forms.Form):
+    participant = forms.IntegerField(widget=forms.HiddenInput())
+    grade = forms.IntegerField()

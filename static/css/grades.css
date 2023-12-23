@@ -29,12 +29,12 @@ input{
     /*width: 100%;*/
 }
 button {
-    border-top: 1px solid #161616;
+    /*border-top: 1px solid #161616;*/
     background-color: #08d;
     border-radius: 12px;
-    border-top: 3em;
+    /*border-top: 3em;*/
     box-sizing: border-box;
-    color: #eee;
+    /*color: #eee;*/
     cursor: pointer;
     height: 50px;
     margin-top: 10px;

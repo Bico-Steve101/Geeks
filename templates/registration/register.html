@@ -1,129 +1,19 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, user-scalable=no,
-    initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <title>Geeks</title>
-      <link rel="stylesheet" href="{% static '/css/footer.css' %}">
-    <link rel="icon" type="image/png" href="{% static '/img/logo.svg' %}">
-    <link  rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"
-    integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w=="
-    crossorigin="anonymous" />
-    <link rel="stylesheet" href="{% static '/css/main.css' %}">
-        <link rel="stylesheet" href="{% static '/css/form.css' %}">
+<form method="post" action="{% url 'grade_all_participants' hackathon_id=hackathon.id %}">
+    {% csrf_token %}
+    {{ formset.management_form }}
 
-    <?xml version="1.0" standalone="no"?>
-<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 20010904//EN"
- "">
- <link rel="stylesheet" href="http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
-</head>
-<body>
-<div class="form">
+    {% for form in formset %}
+        {{ form.id }}
+        <h3>{{ form.instance.participant.username }}</h3>
 
-    <form method="post">
-        {% csrf_token %}
-        {{ form.non_field_errors }}
-  <div class="title">SIGN UP</div>
-  <!-- <div class="subtitle">Let's create your account!</div> -->
-    <div class="names_section">
-    <div class="input-container name1 ic1">
-    <input id="id_first_name" class="input" name="first_name" type="text" placeholder=" " />
-    <div class="cut"></div>
-    <label for="id_first_name" class="placeholder">First name</label>
-  </div>
-    <div class="input-container name2 ic1">
-    <input id="id_last_name" class="input" name="last_name" type="text" placeholder=" " />
-    <div class="cut"></div>
-    <label for="id_last_name" class="placeholder">Last name</label>
-  </div>
-    </div>
-    <div class="input-container ic1">
-    <input required id="id_username" class="input" name="username" type="text" placeholder=" " />
-    <div class="cut"></div>
-    <label for="id_username" class="placeholder">Username</label>
-  </div>
-    <div class="input-container ic2">
-    <input  required id="id_email" class="input" name="email" type="email"  placeholder=" " />
-    <div class="cut"></div>
-    <label for="id_email" class="placeholder">Email</label>
-  </div>
-    <div class="input-container ic1">
-    <input required id="id_password1" class="input" name="password1" type="password" autocomplete="new-password" placeholder=" " />
-    <div class="cut "></div>
-        <label for="id_password1" class="placeholder">Password</label>
-  </div>
-    <div class="input-container ic1">
-    <input required id="id_password2" class="input" name="password2" type="password" autocomplete="new-password" placeholder=" " />
-    <div class="cut confirm cut-short"></div>
-        <label for="id_password2" class="placeholder">Confirm Password</label>
-  </div>
-         {% if form.errors %}
-    <ul>
-    {% for field in form %}
-        {% for error in field.errors %}
-            <li>{{ field.label }}: {{ error }}</li>
-        {% endfor %}
+        <!-- Grade Field -->
+        <div>
+            <label for="{{ form.id }}-grade">Participant Grade:</label>
+            {{ form.grade }}
+        </div>
+
+        <hr>
     {% endfor %}
-    </ul>
-{% endif %}
-  <button type="text" class="submit">SUBMIT</button>
-        </form>
-    <p>Already have an account? <a href="{% url 'login' %}">Login here</a></p>
-        <p class="back_home"> <a href="{% url 'last:index' %}">HOME</a></p>
 
-</div>
-
-
-
-{#<div class="container">#}
-{#    <h2>Register</h2>#}
-{#    <form method="post">#}
-{#        {% csrf_token %}#}
-{#        {{ form.non_field_errors }}#}
-{#        <div class="form-group">#}
-{#            <label for="{{ form.first_name.id_for_label }}">First Name:</label>#}
-{#            {{ form.first_name }}#}
-{#        </div>#}
-{#        <div class="form-group">#}
-{#            <label for="{{ form.last_name.id_for_label }}">Last Name:</label>#}
-{#            {{ form.last_name }}#}
-{#        </div>#}
-{#        <div class="form-group">#}
-{#            <label for="{{ form.username.id_for_label }}">Username:</label>#}
-{#            {{ form.username }}#}
-{#        </div>#}
-{#        <div class="form-group">#}
-{#            <label for="{{ form.email.id_for_label }}">Email:</label>#}
-{#            {{ form.email }}#}
-{#        </div>#}
-{#        <div class="form-group">#}
-{#            <label for="{{ form.password1.id_for_label }}">Password:</label>#}
-{#            {{ form.password1 }}#}
-{#        </div>#}
-{#        <div class="form-group">#}
-{#            <label for="{{ form.password2.id_for_label }}">Confirm Password:</label>#}
-{#            {{ form.password2 }}#}
-{#        </div>#}
-{#        <button type="submit" class="btn btn-primary">Register</button>#}
-{#    </form>#}
-{#    {% if form.errors %}#}
-{#    <ul>#}
-{#    {% for field in form %}#}
-{#        {% for error in field.errors %}#}
-{#            <li>{{ field.label }}: {{ error }}</li>#}
-{#        {% endfor %}#}
-{#    {% endfor %}#}
-{#    </ul>#}
-{#{% endif %}#}
-{#    <p>Already have an account? <a href="{% url 'login' %}">Login here</a></p>#}
-{#</div>#}
-<footer class="footer">
-<p class="footer_copyright">
- © Copyright 2023. Geeks By Steve Rebrand.
-</p>
-</footer>
-</body>
-</html>
+    <button type="submit">Grade Participants</button>
+</form>

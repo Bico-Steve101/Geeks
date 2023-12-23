@@ -41,11 +41,8 @@ class Hackathons(models.Model):
 
 class Grade(models.Model):
     participant = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
-    # participant = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     hackathon = models.ForeignKey(Hackathons, on_delete=models.CASCADE)
-    grade = models.DecimalField(max_digits=5, decimal_places=2)
-
-    # submission = models.FileField(upload_to='submissions/')
+    grade = models.DecimalField(max_digits=5, decimal_places=2, default=0)
 
     def __str__(self):
         return f"{self.participant.username} in {self.hackathon.name}"
@@ -147,21 +144,8 @@ def __str__(self):
     return self.user.username
 
 
-# class UserContact(models.Model):
-#     # user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
-#     # instagram = models.ForeignKey(Contacts, related_name='instagram_related', on_delete=models.CASCADE, blank=True)
-#     twitter = models.ForeignKey(Contacts,  on_delete=models.CASCADE, blank=True)
-#     youtube = models.ForeignKey(Contacts,  on_delete=models.CASCADE, blank=True)
-#     linkedin = models.ForeignKey(Contacts,  on_delete=models.CASCADE, blank=True)
-#     facebook = models.ForeignKey(Contacts,  on_delete=models.CASCADE, blank=True)
-#
-#     def __str__(self):
-#         return self.user.username
-
-
 class Team(models.Model):
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
-    # user_project = models.ForeignKey(Projects, on_delete=models.CASCADE)
     avatar = models.ImageField(upload_to='media/user_profile', default='media/user_profile/steve-rebrand-logo.png')
     user_tag = models.CharField(max_length=50)
     user_email = models.EmailField(max_length=254, blank=True, unique=True)
@@ -171,17 +155,5 @@ class Team(models.Model):
     description = models.TextField(max_length=200)
     describe = models.TextField(max_length=200)
 
-    # user_contact = models.ForeignKey(UserContact, null=True, on_delete=models.CASCADE)
-
-    # @receiver(post_save, sender=User)
-    # def create_user_profile(self, instance, created, **kwargs):
-    #     if created:
-    #         Profile.objects.create(user=instance)
-    #
-    # @receiver(post_save, sender=User)
-    # def create_user_profile(self, instance, **kwargs):
-    #     instance.profile.save()
-
     def __str__(self):
-        # return f'{self.user.username} Profile'
         return self.user.username

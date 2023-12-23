@@ -138,6 +138,10 @@ header {
   cursor: pointer;
   transition: .2s all;
 }
+.gradep{
+  margin-bottom: 1em!important;
+
+}
 
 .menu__link:hover {
   color: #bbb566;

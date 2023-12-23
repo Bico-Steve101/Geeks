@@ -49,7 +49,7 @@
                     </ul>
                     <div class="header__signup">
                         {% if request.user.is_authenticated %}
-                        <a href="{% url 'logout' %}" class="btn btn__signup">
+                        <a href="{% url 'last:logout' %}" class="btn btn__signup">
                             <i class="fas fa-user-plus"></i> Logout
                         </a>
                         {% else %}
@@ -135,14 +135,16 @@
                                 </div>
                             </div>
                             <div class="user__description">
-                                                {% for grade in grades %}
-                                                                        {% if grade.participant == participant %}
-                                <div class="grade"><p>{{ grade.grade|floatformat:0  }}%</p></div>
-                                                                        {% endif %}
+                            {% for grade in grades %}
+                                {% if grade.participant == participant %}
+                                <div class="grade">
+                                    <p>{{ grade.grade|floatformat:0  }}%</p>
+                                </div>
+                                {% endif %}
 
-                                                {% endfor %}
+                            {% endfor %}
 
-                                                    </div>
+                            </div>
                              <div class="edit">
                                     {% if participant == request.user %}
                                         <a href="{% url 'last:edit-profile' %}">
@@ -161,6 +163,7 @@
                             </div>
             {% endif %}
                         </div>
+
                         {% empty %}
                     <div class="empty">
                     <img src="{% static '/img/inbox.png'%}" alt="Logo">
@@ -171,9 +174,14 @@
                 </div>
             </div>
         </section>
-<div class="center_content" style="margin: auto;width: 12em">
-    <a href="{% url 'last:download_hackathon_report' hackathon.id %}" download>Download Grades</a>
-</div>
+            {% if request.user == hackathon.founder %}
+            <div class="center_content gradep" style="margin: auto;width: 12em">
+                <a href="{% url 'last:grade_all_participants' hackathon_id=hackathon.id %}">Grade All Participants</a>
+            </div>
+            {% endif %}
+            <div class="center_content graded" style="margin: auto;width: 12em">
+                <a href="{% url 'last:download_hackathon_report' hackathon.id %}" download>Download Grades</a>
+            </div>
         <section  class="opportunities">
             <div class="opportunities__img">
                 <img src="{% static '/img/laptop.png'%}" alt="">
@@ -321,38 +329,6 @@
                     <img src="{% static '/img/inbox.png'%}" alt="Logo">
                     </div>
                      {% endfor %}
-{#                    <div class="invest__item">#}
-{#                        <div class="invest__item__head">#}
-{#                            <h5 class="invest__item__subtitle">1st Jan-2023</h5>#}
-{#                        </div>#}
-{#                        <div class="invest__item__body">#}
-{#                            <h4 class="invest__item__title">Reserve Room</h4>#}
-{#                            <p class="invest__item_description">#}
-{#                                The Website allows you to reserve a hotel room prior#}
-{#                                to your travel.Saving you of the hustle.#}
-{#                            </p>#}
-{#                        </div>#}
-{#                        <div class="invest__item__footer">#}
-{#                            <a href="#" class="btn btn__invest">Join Now</a>#}
-{#                        </div>#}
-{#                    </div>#}
-{#                    <div class="invest__item">#}
-{#                        <div class="invest__item__head">#}
-{#                            <h5 class="invest__item__subtitle">3rd Feb-2023</h5>#}
-{#                        </div>#}
-{#                        <div class="invest__item__body">#}
-{#                            <h4 class="invest__item__title">Study Manager#}
-{#                            </h4>#}
-{#                            <p class="invest__item_description">#}
-{#                                The website is meant to make learning easy and fun,#}
-{#                                helping you manage your progress.It's also meant to#}
-{#                                keep students on track.#}
-{#                            </p>#}
-{#                        </div>#}
-{#                        <div class="invest__item__footer">#}
-{#                            <a href="#" class="btn btn__invest">Join Now</a>#}
-{#                        </div>#}
-{#                    </div>#}
                 </div>
             </div>
         </section>

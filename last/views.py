@@ -1,4 +1,6 @@
 # from django.contrib.sites import requests
+from typing import Type
+
 import requests
 from django.urls import reverse
 import math
@@ -6,7 +8,7 @@ from django.db.models import Q
 from django.http import JsonResponse
 from django.utils import timezone
 from datetime import timedelta
-from django.core.serializers import serialize
+from django.forms import modelformset_factory, BaseModelFormSet, formset_factory
 import json
 from django.contrib import messages
 from django.contrib.auth import login, authenticate, logout
@@ -15,7 +17,8 @@ from django.contrib.auth.forms import UserCreationForm
 from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 # from django.contrib.auth.models import User
-from .forms import UserRegistrationForm, UserForm, HackathonForm, ContactForm, ProjectForm, GradeForm, GradeFormSet
+from .forms import UserRegistrationForm, UserForm, HackathonForm, ContactForm, ProjectForm, GradeForm, GradeFormSet, \
+    GradeFormAll
 
 from last.models import Projects, Team, Hackathons, Grade, User, Contacts
 
@@ -231,28 +234,6 @@ def join_hackathon(request, hackathon_id):
     return redirect('last:hackathon_details', hackathon_id=hackathon_id)
 
 
-# def grade_participant(request, hackathon_id, participant_id):
-#     hackathon = get_object_or_404(Hackathons, pk=hackathon_id)
-#
-#     # Check if the current user is the hackathon founder
-#     if request.user == hackathon.founder:
-#         participant = get_object_or_404(User, pk=participant_id)
-#         grade, created = Grade.objects.get_or_create(hackathon=hackathon, participant=participant)
-#
-#         if request.method == 'POST':
-#             form = GradeForm(request.POST, instance=grade)
-#             if form.is_valid():
-#                 form.save()
-#                 return redirect('hackathon_details', hackathon_id=hackathon_id)
-#         else:
-#             form = GradeForm(instance=grade)
-#
-#         return render(request, 'registration/grade_participant.html',
-#         {'form': form, 'participant': participant, 'hackathon': hackathon})
-#     else:
-#         return HttpResponse("You are not authorized to grade participants in this hackathon.")
-#
-
 @login_required(login_url='/login')
 def grade_participant(request, hackathon_id, participant_id):
     hackathon = get_object_or_404(Hackathons, pk=hackathon_id)
@@ -287,19 +268,39 @@ def grade_all_participants(request, hackathon_id):
     hackathon = get_object_or_404(Hackathons, pk=hackathon_id)
     participants = hackathon.participants.all()
 
+    # Fetch existing grades for the participants
+    existing_grades = Grade.objects.filter(hackathon=hackathon)
+
+    # Create a dictionary to store existing grades for quick lookup
+    existing_grades_dict = {grade.participant_id: grade.grade for grade in existing_grades}
+
+    GradeFormSet = formset_factory(GradeFormAll, extra=len(participants))
+
     if request.method == 'POST':
-        for participant in participants:
-            form = GradeForm(request.POST)
-            if form.is_valid():
-                grade_instance, _ = Grade.objects.get_or_create(hackathon=hackathon, participant=participant)
+        formset = GradeFormSet(request.POST)
+
+        if formset.is_valid():
+            for form in formset:
+                participant_id = form.cleaned_data['participant']
+                grade_instance, _ = Grade.objects.get_or_create(
+                    hackathon=hackathon,
+                    participant_id=participant_id
+                )
                 grade_instance.grade = form.cleaned_data['grade']
                 grade_instance.save()
-        return redirect('hackathon_details', hackathon_id=hackathon_id)
+
+            messages.success(request, 'Grades updated successfully!')
+            return redirect('last:hackathon_details', hackathon_id=hackathon_id)
+        else:
+            messages.error(request, 'Form submission failed. Please check your input.')
+
     else:
-        form = GradeForm()
+        initial_data = [{'participant': participant.id, 'grade': existing_grades_dict.get(participant.id, 0)} for
+                        participant in participants]
+        formset = GradeFormSet(initial=initial_data)
 
     return render(request, 'registration/grade_all_participants.html',
-                  {'participants': participants, 'hackathon': hackathon, 'form': form})
+                  {'formset': formset, 'hackathon': hackathon, 'participants': participants})
 
 
 @login_required(login_url='/login')
@@ -339,47 +340,17 @@ def delete_hackathon(request, hackathon_id):
     hackathon = get_object_or_404(Hackathons, id=hackathon_id)
     if request.method == 'POST':
         hackathon.delete()
-        # Redirect to a specific URL after deleting the hackathon, for example, the hackathon list
         return redirect('last:index')
     return render(request, 'registration/confirm_hackathon_delete.html', {'hackathon': hackathon})
 
-
-# def hackathons(request):
-#     hackathons = Hackathons.objects.all()
-#
-#     if request.method == 'GET':
-#         hackathon_id = request.GET.get('hackathon_id')
-#         if hackathon_id is not None:
-#             hackathon = Hackathons.objects.get(id=hackathon_id)
-#             return redirect('hackathon_details', hackathon.id)
-#
-#     participants = []
-#
-#     for hackathon in hackathons:
-#         grades = Grade.objects.filter(hackathon=hackathon)
-#         for grade in grades:
-#             participant = {
-#                 'avatar': grade.user.avatar,
-#                 'username': grade.user.username,
-#                 'grade': grade.grade,
-#             }
-#             participants.append(participant)
-#
-#     context = {
-#         'hackathons': hackathons,
-#         'participants': participants,
-#     }
-#
-#     return render(request, 'hackathons.html', context)
-#
 
 def register(request):
     if request.method == 'POST':
         form = UserRegistrationForm(request.POST)
         if form.is_valid():
             user = form.save()
-            login(request, user)  # Log the user in after registration
-            return redirect('last:profile', pk=user.pk)  # Redirect to the user's profile or any other desired page
+            login(request, user)
+            return redirect('last:profile', pk=user.pk)
     else:
         form = UserRegistrationForm()
 
@@ -388,7 +359,6 @@ def register(request):
 
 def user_login(request):
     if request.method == 'POST':
-        # Assuming you have 'username', 'password', and 'email' fields in your form
         username = request.POST.get('username')
         password = request.POST.get('password')
         email = request.POST.get('email')
@@ -399,7 +369,7 @@ def user_login(request):
             login(request, user)
             messages.success(request, 'You have successfully logged in.')
             return redirect(
-                '/')  # You might want to replace 'base.html' with the actual URL or view name you want to redirect to after login
+                '/')
         else:
             messages.error(request, 'Failed to log in. Please check your credentials.')
             return render(request, 'registration/login.html')
@@ -410,39 +380,6 @@ def user_login(request):
 def user_logout(request):
     logout(request)
     return render(request, 'registration/logout.html')
-
-
-# def projects(request, pk):
-#     project = Projects.objects.get(id=pk)
-#     context = {
-#         'project': project
-#     }
-#
-#     return render(request, 'profile.html', context)
-
-
-# def grades(request, pk):
-#     user_grade = Grade.objects.get(id=pk)
-#     context = {
-#         'user_grade': user_grade
-#     }
-#     return render(request, 'profile.html', context)
-#
-
-# def teams(request, pk):
-#     team = Team.objects.get(id=pk)
-#     context = {
-#         'team': team
-#     }
-#     return render(request, 'profile.html', context)
-
-
-# def contacts(request, pk):
-#     contact = Contacts.objects.get(id=pk)
-#     context = {
-#         'contact': contact
-#     }
-#     return render(request, 'profile.html', context)
 
 
 def UserProfile(request, pk):
