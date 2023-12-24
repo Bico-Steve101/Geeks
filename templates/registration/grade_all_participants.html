@@ -1,26 +1,34 @@
-{#{% extends 'base.html' %}#}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Grade Participants</title>
+  <link rel="stylesheet" href="{% static '/css/grades.css' %}">
+      <link rel="stylesheet" href="{% static '/css/footer.css' %}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/js/bootstrap.bundle.min.js">
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+</head>
+<body>
+<h2>Grade Participants: <h1 class="participant">"{{ hackathon.name }}"</h1></h2>
+<form method="post" action="{% url 'last:grade_all_participants' hackathon_id=hackathon.id %}">
+  {% csrf_token %}
+  {% for form in formset %}
+    {{ form.initial.username }}: {{ form.as_p }}
+    <br>
+  {% endfor %}
+  <button type="submit">Submit</button>
+</form>
 
-{#{% block content %}#}
-  <h1>Grade All Participants</h1>
-  <form method="post">
-    {% csrf_token %}
-    {{ formset.management_form }}
-    <table>
-      <thead>
-        <tr>
-          <th>Participant</th>
-          <th>Grade</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for form in formset %}
-          <tr>
-            <td>{{ form.participant }}</td>
-            <td>{{ form.grade }}</td>
-          </tr>
-        {% endfor %}
-      </tbody>
-    </table>
-    <button type="submit">Submit</button>
-  </form>
-{#{% endblock %}#}
+    <footer class="footer">
+        <p class="footer_copyright">
+                        © Copyright 2023. Geeks By Steve Rebrand.
+        </p>
+    </footer>
+
+ <script src="{%static '/js/edit-hackathon.js' %}" type="module"></script>
+</body>
+</html>
+</html>

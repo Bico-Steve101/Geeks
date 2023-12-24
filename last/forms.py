@@ -60,6 +60,12 @@ class GradeForm(forms.ModelForm):
 GradeFormSet = forms.modelformset_factory(Grade, form=GradeForm, extra=0)
 
 
-class GradeFormAll(forms.Form):
-    participant = forms.IntegerField(widget=forms.HiddenInput())
-    grade = forms.IntegerField()
+class GradeFormAll(forms.ModelForm):
+    class Meta:
+        model = Grade
+        fields = ['grade']
+
+    def __init__(self, *args, **kwargs):
+        super(GradeFormAll, self).__init__(*args, **kwargs)
+        self.fields['grade'].widget = forms.NumberInput(attrs={'class': 'form-control'})
+        # self.fields['username'] = forms.CharField(widget=forms.TextInput(attrs={'readonly': 'readonly'}))

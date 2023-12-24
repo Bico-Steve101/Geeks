@@ -13,14 +13,13 @@ import json
 from django.contrib import messages
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.forms import UserCreationForm
+from functools import partial
 from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 # from django.contrib.auth.models import User
 from .forms import UserRegistrationForm, UserForm, HackathonForm, ContactForm, ProjectForm, GradeForm, GradeFormSet, \
     GradeFormAll
-
-from last.models import Projects, Team, Hackathons, Grade, User, Contacts
+from last.models import Projects, Team, Hackathons, Grade, User, Contacts, Participant
 
 
 # Create your views here.
@@ -268,39 +267,23 @@ def grade_all_participants(request, hackathon_id):
     hackathon = get_object_or_404(Hackathons, pk=hackathon_id)
     participants = hackathon.participants.all()
 
-    # Fetch existing grades for the participants
-    existing_grades = Grade.objects.filter(hackathon=hackathon)
+    if request.user == hackathon.founder:
 
-    # Create a dictionary to store existing grades for quick lookup
-    existing_grades_dict = {grade.participant_id: grade.grade for grade in existing_grades}
-
-    GradeFormSet = formset_factory(GradeFormAll, extra=len(participants))
-
-    if request.method == 'POST':
-        formset = GradeFormSet(request.POST)
-
-        if formset.is_valid():
-            for form in formset:
-                participant_id = form.cleaned_data['participant']
-                grade_instance, _ = Grade.objects.get_or_create(
-                    hackathon=hackathon,
-                    participant_id=participant_id
-                )
-                grade_instance.grade = form.cleaned_data['grade']
-                grade_instance.save()
-
-            messages.success(request, 'Grades updated successfully!')
+        if request.method == 'POST':
+            for participant in participants:
+                form = GradeFormAll(request.POST, prefix=str(participant.id))
+                if form.is_valid():
+                    grade_instance, _ = Grade.objects.get_or_create(hackathon=hackathon, participant=participant)
+                    grade_instance.grade = form.cleaned_data['grade']
+                    grade_instance.save()
             return redirect('last:hackathon_details', hackathon_id=hackathon_id)
         else:
-            messages.error(request, 'Form submission failed. Please check your input.')
+            formset = [GradeFormAll(prefix=str(participant.id), initial={'username': participant.username}) for participant in participants]
 
+        return render(request, 'registration/grade_all_participants.html',
+                      {'participants': participants, 'hackathon': hackathon, 'formset': formset})
     else:
-        initial_data = [{'participant': participant.id, 'grade': existing_grades_dict.get(participant.id, 0)} for
-                        participant in participants]
-        formset = GradeFormSet(initial=initial_data)
-
-    return render(request, 'registration/grade_all_participants.html',
-                  {'formset': formset, 'hackathon': hackathon, 'participants': participants})
+        return HttpResponse("You are not authorized to grade participants in this hackathon.")
 
 
 @login_required(login_url='/login')

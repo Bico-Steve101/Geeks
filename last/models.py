@@ -39,6 +39,11 @@ class Hackathons(models.Model):
         return self.name
 
 
+class Participant(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    hackathon = models.ForeignKey(Hackathons, on_delete=models.CASCADE)
+
+
 class Grade(models.Model):
     participant = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     hackathon = models.ForeignKey(Hackathons, on_delete=models.CASCADE)
