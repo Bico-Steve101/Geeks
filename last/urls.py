@@ -47,3 +47,5 @@ handler401 = 'last.views.error_401_view'
 handler400 = 'last.views.error_400_view'
 
 handler500 = 'last.views.error_500_view'
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
